@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {%  load static %}
+
+{%  block content %}
+    <div class="row">
+        <div class="col-md-4">
+            <img width="85" src="{% static 'shazam.svg' %}" alt="">
+        </div>
+        <div class="col-md-8 justify-content-end">
+            <div>
+                <a href="{% url 'blog:all_blogs' %}">Blog</a>
+            </div>
+            <div>
+                <a href="{% static 'AmilAbdullayevEN.pdf' %}">My CV</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for project in projects %}
+            <div class="card my-2 mx-2" style="width: 18rem;">
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text">{{ project.description }}</p>
+                    {% if project.url %}
+                        <a href="{{ project.url }}" class="btn btn-outline-danger">Go</a>
+                    {% else %}
+                        <small>Link yoxdur</small>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

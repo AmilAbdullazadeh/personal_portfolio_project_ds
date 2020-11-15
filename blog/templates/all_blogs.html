@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {%  load static %}
+
+{%  block content %}
+            <div class="row ">
+                <div class="text-center" >
+                    <h5>Amil has written {{ blogs.count }} blog{{ blogs.count|pluralize }}</h5>
+                </div>
+            </div>
+            <div class="card-deck my-4">
+                {% for blog in blogs %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ blog.title|title }}</h5>
+                            <p class="card-text">{{ blog.description|upper|striptags|truncatechars:10 }}</p>
+                            <p class="card-text"><small class="text-muted">{{ blog.date|date:'M d Y'|upper }}</small></p>
+                            <a href="{% url 'blog:detail' blog.id %}" class="btn btn-outline-primary">Go to Blog</a>
+                        </div>
+                    </div>
+                {% endfor %}
+        </div>
+{% endblock %}
